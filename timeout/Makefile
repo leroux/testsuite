@@ -37,14 +37,7 @@ else
 # Haskell program on Windows
 $(TIMEOUT_PROGRAM): timeout.hs
 	rm -rf install-inplace
-	'$(TEST_HC)' --make Setup
-	./Setup configure --with-compiler='$(TEST_HC)' \
-	                  --with-hc-pkg='$(GHC_PKG)' \
-	                  --with-hsc2hs='$(HSC2HS)' \
-	                  $(WITH_GCC) \
-	                  --ghc-option=-threaded --prefix='$(PREFIX)'
-	./Setup build
-	./Setup install
+	cabal install --prefix='$(PREFIX)'
 endif
 
 boot all :: calibrate.out $(TIMEOUT_PROGRAM)
